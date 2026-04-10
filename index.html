@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paul McCartney - Discografía</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --fg: #ffffff;
+            --muted: #777777;
+            --card: #141414;
+            --border: #252525;
+        }
+        
+        [data-theme="light"] {
+            --bg: #f7f6f3;
+            --fg: #1a1a1a;
+            --muted: #666666;
+            --card: #ffffff;
+            --border: #e5e3de;
+        }
+
+        [data-theme="light"] header {
+            background: rgba(247, 246, 243, 0.95) !important;
+        }
+
+        [data-theme="light"] #bio {
+            background: rgba(0, 0, 0, 0.03) !important;
+        }
+
+        [data-theme="light"] .text-gray-400 { color: #666 !important; }
+        [data-theme="light"] .text-gray-500 { color: #888 !important; }
+        [data-theme="light"] .text-gray-600 { color: #aaa !important; }
+        [data-theme="light"] .hover\:text-white:hover { color: var(--fg) !important; }
+
+        [data-theme="light"] .album-card img { filter: grayscale(15%); }
+        [data-theme="light"] .album-card:hover img { filter: grayscale(0%); }
+
+        [data-theme="light"] .grayscale { filter: grayscale(15%) !important; }
+
+        [data-theme="light"] .hero-bg-img {
+            opacity: 0.18 !important;
+            filter: grayscale(30%) !important;
+        }
+        [data-theme="light"] .hero-overlay {
+            background: linear-gradient(to bottom, rgba(247,246,243,0.3), var(--bg) 90%) !important;
+        }
+
+        [data-theme="light"] .milestone-card {
+            background: var(--card) !important;
+            border-color: var(--border) !important;
+        }
+
+        [data-theme="light"] .milestone-hover-img {
+            opacity: 0 !important;
+            filter: grayscale(20%) brightness(0.7) !important;
+        }
+        [data-theme="light"] .milestone-card:hover .milestone-hover-img {
+            opacity: 0.25 !important;
+        }
+
+        [data-theme="light"] .timeline-bg-img {
+            opacity: 0.12 !important;
+            filter: grayscale(30%) brightness(0.85) !important;
+        }
+
+        [data-theme="light"] #newsletter-success {
+            border-color: #bbf7d0 !important;
+            background: rgba(34, 197, 94, 0.08) !important;
+        }
+        [data-theme="light"] #newsletter-error {
+            border-color: #fecaca !important;
+            background: rgba(239, 68, 68, 0.08) !important;
+        }
+
+        [data-theme="light"] ::selection {
+            background: #1a1a1a;
+            color: #f7f6f3;
+        }
+
+        body, header, section, footer, .album-card, .filter-btn,
+        .social-icon, .contact-icon-box, .newsletter-input, .footer-link {
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+        }
+        .album-card img {
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+        }
+        
+        .font-display { font-family: 'Cormorant Garamond', serif; }
+        
+        .album-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .album-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--muted);
+        }
+        
+        .album-card img {
+            filter: grayscale(100%);
+        }
+        
+        .album-card:hover img { filter: grayscale(0%); }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--fg);
+            color: var(--bg);
+            border-color: var(--fg);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-bg-img {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://www.billboard.com/wp-content/uploads/media/Paul-McCartney-1967-sitting-billboard-1548.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.60;
+            filter: grayscale(100%);
+            transition: opacity 0.4s ease, filter 0.4s ease;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.3), var(--bg) 90%);
+            transition: background 0.4s ease;
+        }
+
+        .milestone-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .milestone-card:hover {
+            border-color: var(--muted);
+            transform: translateY(-3px);
+        }
+        .milestone-hover-img {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            filter: grayscale(100%) brightness(0.5);
+            pointer-events: none;
+        }
+        .milestone-card:hover .milestone-hover-img {
+            opacity: 0.2;
+        }
+        .milestone-content {
+            position: relative;
+            z-index: 2;
+        }
+        .milestone-number {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.8rem;
+            line-height: 1;
+            margin-bottom: 8px;
+            color: var(--fg);
+            letter-spacing: -1px;
+        }
+        .milestone-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+        }
+        .milestone-icon {
+            margin-bottom: 16px;
+            color: var(--muted);
+            opacity: 0.5;
+        }
+
+        .timeline-bg-img {
+            position: absolute;
+            inset: -40px -40px;
+            background-image: url('https://i0.wp.com/bassmagazine.com/wp-content/uploads/2026/03/Paul-McCartney.png?fit=2342,1270&ssl=1');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            filter: grayscale(100%) brightness(0.6);
+            pointer-events: none;
+            border-radius: 8px;
+            transition: opacity 0.4s ease, filter 0.4s ease;
+        }
+
+        .newsletter-input {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--fg);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--muted);
+        }
+        .newsletter-input::placeholder {
+            color: #555;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--muted);
+        }
+        .social-icon:hover {
+            border-color: var(--fg);
+            color: var(--fg);
+            transform: translateY(-2px);
+        }
+
+        .footer-link {
+            color: var(--muted);
+            font-size: 13px;
+            transition: color 0.3s ease;
+        }
+        .footer-link:hover {
+            color: var(--fg);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .contact-icon-box {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--muted);
+            transition: all 0.3s ease;
+        }
+        .contact-item:hover .contact-icon-box {
+            border-color: var(--muted);
+            color: var(--fg);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin { animation: spin 1s linear infinite; }
+
+        ::selection {
+            background: var(--fg);
+            color: var(--bg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 py-4 px-6" style="background: rgba(10,10,10,0.95); backdrop-filter: blur(10px);">
+        <nav class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="#" class="font-display text-2xl">Paul McCartney</a>
+            <div class="flex items-center gap-8">
+                <div class="hidden md:flex gap-8">
+                    <a href="#bio" class="text-sm text-gray-400 hover:text-white transition">Biografía</a>
+                    <a href="#discos" class="text-sm text-gray-400 hover:text-white transition">Discografía</a>
+                    <a href="#noticias" class="text-sm text-gray-400 hover:text-white transition">Noticias</a>
+                </div>
+                <button id="theme-toggle" class="w-9 h-9 flex items-center justify-center border cursor-pointer" style="border-color: var(--border); color: var(--muted); background: transparent;" title="Cambiar tema">
+                    <iconify-icon id="icon-moon" icon="lucide:moon" width="16"></iconify-icon>
+                    <iconify-icon id="icon-sun" icon="lucide:sun" width="16" style="display:none;"></iconify-icon>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center justify-center text-center px-6 overflow-hidden">
+        <div class="hero-bg-img"></div>
+        <div class="hero-overlay"></div>
+        <div class="relative z-10 fade-in">
+            <p class="text-sm tracking-widest text-gray-500 uppercase mb-4">Biblioteca Musical</p>
+            <h1 class="font-display text-6xl md:text-8xl font-light mb-4">Paul <span class="italic">McCartney</span></h1>
+            <p class="text-gray-400 max-w-xl mx-auto">Explora la discografía del músico más influyente de la historia</p>
+        </div>
+    </section>
+
+    <!-- Biografía -->
+    <section id="bio" class="py-20 px-6 bg-neutral-900/50">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="fade-in">
+                <img src="https://www.radiostudio90italia.it/wp-content/uploads/2026/03/156136-the-boys-of-dungeon-lane-e-il-nuovo-album-solista-di-paul-mccartney.jpg" 
+                     alt="Paul McCartney" class="w-full aspect-[4/5] object-cover grayscale">
+            </div>
+            <div class="fade-in" style="animation-delay: 0.2s;">
+                <h2 class="font-display text-4xl font-light mb-4">La música en vida</h2>
+                <p class="text-gray-400 leading-relaxed mb-4">
+                    Sir Paul McCartney (Liverpool, 1942) es uno de los compositores más exitosos de la historia. 
+                    Como miembro de The Beatles y posteriormente con Wings, además de su carrera solista, ha vendido más de 
+                    100 millones de álbumes.
+                </p>
+                <p class="text-gray-400 leading-relaxed">
+                    Su legado incluye clásicos eternos como "Yesterday", "Hey Jude", "Let It Be", "Band On The Run" y "Live And Let Die", consolidándose 
+                    como figura central de la música popular del siglo XX.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SECCIÓN HITOS DE SU CARRERA -->
+    <section id="hitos" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-xs tracking-widest text-gray-500 uppercase mb-4">Cifras que hablan</p>
+                <h2 class="font-display text-4xl md:text-5xl font-light">Hitos de su <span class="italic">carrera</span></h2>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                <div class="milestone-card fade-in" style="animation-delay: 0.05s;">
+                    <div class="milestone-hover-img" style="background-image: url('https://shop.udiscovermusic.com/cdn/shop/files/Untitled-1_4bd62b86-34e8-4d0d-b032-a6e09c58ace5.png?v=1748616648&width=1000');"></div>
+                    <div class="milestone-content">
+                        <div class="milestone-icon"><iconify-icon icon="lucide:disc-3" width="28"></iconify-icon></div>
+                        <div class="milestone-number">600M</div>
+                        <div class="milestone-label">Discos vendidos en todo el mundo</div>
+                    </div>
+                </div>
+                <div class="milestone-card fade-in" style="animation-delay: 0.1s;">
+                    <div class="milestone-hover-img" style="background-image: url('https://i8.amplience.net/i/naras/2026_grammys_68th_grammy_awards_Date-Hero-V3_1644x925?fmt=auto&w=5000');"></div>
+                    <div class="milestone-content">
+                        <div class="milestone-icon"><iconify-icon icon="lucide:trophy" width="28"></iconify-icon></div>
+                        <div class="milestone-number">19</div>
+                        <div class="milestone-label">Premios Grammy ganados</div>
+                    </div>
+                </div>
+                <div class="milestone-card fade-in" style="animation-delay: 0.15s;">
+                    <div class="milestone-hover-img" style="background-image: url('https://tzdaz.wordpress.com/wp-content/uploads/2011/04/beatles61.jpg?w=640');"></div>
+                    <div class="milestone-content">
+                        <div class="milestone-icon"><iconify-icon icon="lucide:calendar-days" width="28"></iconify-icon></div>
+                        <div class="milestone-number">60+</div>
+                        <div class="milestone-label">Años de trayectoria musical</div>
+                    </div>
+                </div>
+                <div class="milestone-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="milestone-hover-img" style="background-image: url('https://es.rollingstone.com/wp-content/uploads/2024/10/2-PaulMcCartneyAPERTURA-051024-ADAN8025-Mejorado-NR-@1600.iso_.jpg');"></div>
+                    <div class="milestone-content">
+                        <div class="milestone-icon"><iconify-icon icon="lucide:mic-2" width="28"></iconify-icon></div>
+                        <div class="milestone-number">2500+</div>
+                        <div class="milestone-label">Conciertos en vivo realizados</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+                <div class="milestone-card fade-in" style="animation-delay: 0.25s;">
+                    <div class="milestone-hover-img" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaV6JYek6GFaK2ez6sDQKP9AE0vs5vUeNnxw&s');"></div>
+                    <div class="milestone-content">
+                        <div class="milestone-icon"><iconify-icon icon="lucide:pen-tool" width="28"></iconify-icon></div>
+                        <div class="milestone-number">32</div>
+                        <div class="milestone-label">Canciones #1 en Billboard (Beatles + solista)</div>
+                    </div>
+                </div>
+                <div class="milestone-card fade-in" style="animation-delay: 0.3s;">
+                    <div class="milestone-hover-img" style="background-image: url('https://cdn.rrauction.com/auction/711/3496666_1.jpg');"></div>
+                    <div class="milestone-content">
+                        <div class="milestone-icon"><iconify-icon icon="lucide:file-text" width="28"></iconify-icon></div>
+                        <div class="milestone-number">600+</div>
+                        <div class="milestone-label">Canciones compuestas por McCartney</div>
+                    </div>
+                </div>
+                <div class="milestone-card fade-in" style="animation-delay: 0.35s;">
+                    <div class="milestone-hover-img" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlw4Bp2psTNd_NshxWhfXucl9N0AtryI91ow&s');"></div>
+                    <div class="milestone-content">
+                        <div class="milestone-icon"><iconify-icon icon="lucide:award" width="28"></iconify-icon></div>
+                        <div class="milestone-number">2</div>
+                        <div class="milestone-label">Inducciones al Rock and Roll Hall of Fame</div>
+                    </div>
+                </div>
+                <div class="milestone-card fade-in" style="animation-delay: 0.4s;">
+                    <div class="milestone-hover-img" style="background-image: url('https://www.guinnessworldrecords.com/news/2015/8/60/images/1979-most-successful-songwriter-392949.jpg');"></div>
+                    <div class="milestone-content">
+                        <div class="milestone-icon"><iconify-icon icon="lucide:crown" width="28"></iconify-icon></div>
+                        <div class="milestone-number">#1</div>
+                        <div class="milestone-label">Compositor más exitoso de la historia (Guinness)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Línea del tiempo -->
+            <div class="fade-in" style="animation-delay: 0.45s;">
+                <h3 class="font-display text-2xl font-light text-center mb-12">Momentos <span class="italic">clave</span></h3>
+                <div class="relative max-w-3xl mx-auto py-12">
+                    <div class="timeline-bg-img"></div>
+                    <div class="relative z-10">
+                        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px" style="background: var(--border);"></div>
+                        <div class="space-y-12">
+
+                            <div class="relative flex items-start gap-8 md:gap-0 fade-in" style="animation-delay: 0s;">
+                                <div class="absolute left-4 md:left-1/2 w-2.5 h-2.5 rounded-full -translate-x-1/2 mt-2" style="background: var(--muted);"></div>
+                                <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
+                                    <span class="text-xs tracking-widest text-gray-500 uppercase">1957</span>
+                                    <h4 class="font-display text-lg mt-1">Encuentro con Lennon</h4>
+                                    <p class="text-sm text-gray-400 mt-1">El origen. Paul conoce a John Lennon en una feria parroquial de Liverpool, un encuentro que daría a luz a la banda más importante de todos los tiempos.</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start gap-8 md:gap-0 fade-in" style="animation-delay: 0.05s;">
+                                <div class="absolute left-4 md:left-1/2 w-2.5 h-2.5 rounded-full -translate-x-1/2 mt-2" style="background: var(--muted);"></div>
+                                <div class="md:w-1/2 md:ml-auto md:pl-12 pl-12">
+                                    <span class="text-xs tracking-widest text-gray-500 uppercase">1963</span>
+                                    <h4 class="font-display text-lg mt-1">Please Please Me</h4>
+                                    <p class="text-sm text-gray-400 mt-1">El primer disco de The Beatles. Grabado en apenas un día en los estudios Abbey Road, marcó el inicio de la Beatlemanía.</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start gap-8 md:gap-0 fade-in" style="animation-delay: 0.1s;">
+                                <div class="absolute left-4 md:left-1/2 w-2.5 h-2.5 rounded-full -translate-x-1/2 mt-2" style="background: var(--muted);"></div>
+                                <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
+                                    <span class="text-xs tracking-widest text-gray-500 uppercase">1965</span>
+                                    <h4 class="font-display text-lg mt-1">Yesterday</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Su composición más famosa. Con más de 2.200 versiones registradas, es la canción más reinterpretada de la historia de la música.</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start gap-8 md:gap-0 fade-in" style="animation-delay: 0.15s;">
+                                <div class="absolute left-4 md:left-1/2 w-2.5 h-2.5 rounded-full -translate-x-1/2 mt-2" style="background: var(--muted);"></div>
+                                <div class="md:w-1/2 md:ml-auto md:pl-12 pl-12">
+                                    <span class="text-xs tracking-widest text-gray-500 uppercase">1967</span>
+                                    <h4 class="font-display text-lg mt-1">Sgt. Pepper's Lonely Hearts Club Band</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Innovación técnica absoluta. Un álbum que redefinió qué podía ser un disco de música popular y cambió la producción musical para siempre.</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start gap-8 md:gap-0 fade-in" style="animation-delay: 0.2s;">
+                                <div class="absolute left-4 md:left-1/2 w-2.5 h-2.5 rounded-full -translate-x-1/2 mt-2" style="background: var(--muted);"></div>
+                                <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
+                                    <span class="text-xs tracking-widest text-gray-500 uppercase">1970</span>
+                                    <h4 class="font-display text-lg mt-1">Inicio de carrera solista</h4>
+                                    <p class="text-sm text-gray-400 mt-1">McCartney I. Tras la disolución de The Beatles, Paul lanza su primer álbum solista, grabado íntegramente en su casa de Londres.</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start gap-8 md:gap-0 fade-in" style="animation-delay: 0.25s;">
+                                <div class="absolute left-4 md:left-1/2 w-2.5 h-2.5 rounded-full -translate-x-1/2 mt-2" style="background: var(--muted);"></div>
+                                <div class="md:w-1/2 md:ml-auto md:pl-12 pl-12">
+                                    <span class="text-xs tracking-widest text-gray-500 uppercase">1971</span>
+                                    <h4 class="font-display text-lg mt-1">Wings</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Resiliencia. Paul forma Wings con Linda McCartney, rechazando la comodidad del estrellato y construyendo una nueva banda desde cero.</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start gap-8 md:gap-0 fade-in" style="animation-delay: 0.3s;">
+                                <div class="absolute left-4 md:left-1/2 w-2.5 h-2.5 rounded-full -translate-x-1/2 mt-2" style="background: var(--muted);"></div>
+                                <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
+                                    <span class="text-xs tracking-widest text-gray-500 uppercase">1985</span>
+                                    <h4 class="font-display text-lg mt-1">Live Aid</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Momento icónico de los 80. Paul se presenta en el concierto benéfico más importante de la historia ante 72.000 personas en el estadio de Wembley.</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start gap-8 md:gap-0 fade-in" style="animation-delay: 0.35s;">
+                                <div class="absolute left-4 md:left-1/2 w-2.5 h-2.5 rounded-full -translate-x-1/2 mt-2" style="background: var(--muted);"></div>
+                                <div class="md:w-1/2 md:ml-auto md:pl-12 pl-12">
+                                    <span class="text-xs tracking-widest text-gray-500 uppercase">1997</span>
+                                    <h4 class="font-display text-lg mt-1">Sir Paul</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Reconocimiento oficial. La Reina Isabel II le otorga el título de Sir por sus contribuciones extraordinarias a la música británica.</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start gap-8 md:gap-0 fade-in" style="animation-delay: 0.4s;">
+                                <div class="absolute left-4 md:left-1/2 w-2.5 h-2.5 rounded-full -translate-x-1/2 mt-2" style="background: var(--muted);"></div>
+                                <div class="md:w-1/2 md:pr-12 md:text-right pl-12 md:pl-0">
+                                    <span class="text-xs tracking-widest text-gray-500 uppercase">1999</span>
+                                    <h4 class="font-display text-lg mt-1">Rock and Roll Hall of Fame</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Introducido como artista solista, once años después de haber entrado con The Beatles. Una de las pocas figuras con doble inducción.</p>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start gap-8 md:gap-0 fade-in" style="animation-delay: 0.45s;">
+                                <div class="absolute left-4 md:left-1/2 w-2.5 h-2.5 rounded-full -translate-x-1/2 mt-2" style="background: var(--muted);"></div>
+                                <div class="md:w-1/2 md:ml-auto md:pl-12 pl-12">
+                                    <span class="text-xs tracking-widest text-gray-500 uppercase">2020</span>
+                                    <h4 class="font-display text-lg mt-1">McCartney III</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Vigencia absoluta. A los 78 años, grabó un álbum completamente solo en su casa durante la pandemia y alcanzó el #1 en Billboard. Sin precedentes.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Discografía -->
+    <section id="discos" class="py-20 px-6" style="background: var(--bg);">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="font-display text-4xl font-light mb-6">Discografía</h2>
+                <div class="flex flex-wrap justify-center gap-3" id="filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="solo">Solista</button>
+                    <button class="filter-btn" data-filter="wings">Wings</button>
+                </div>
+            </div>
+            <div id="albums" class="grid md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </div>
+    </section>
+
+
+    <!-- SUSCRIPCIÓN DE NOTICIAS -->
+    <section id="noticias" class="py-24 px-6 relative overflow-hidden" style="background: var(--bg);">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px" style="background: linear-gradient(to right, transparent, var(--muted), transparent);"></div>
+        <div class="max-w-2xl mx-auto text-center">
+            <p class="text-xs tracking-widest text-gray-500 uppercase mb-4 fade-in">Boletín Informativo</p>
+            <h2 class="font-display text-4xl md:text-5xl font-light mb-4 fade-in" style="animation-delay: 0.1s;">
+                Novedades de <span class="italic">Paul</span>
+            </h2>
+            <p class="text-gray-400 leading-relaxed mb-10 fade-in" style="animation-delay: 0.2s;">
+                Recibe en tu correo las últimas noticias sobre giras, lanzamientos, 
+                proyectos especiales y contenido exclusivo directamente de McCartney.
+            </p>
+            <form id="newsletter-form" class="fade-in" style="animation-delay: 0.3s;">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="relative flex-1">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
+                            <iconify-icon icon="lucide:mail" width="18"></iconify-icon>
+                        </span>
+                        <input type="email" id="newsletter-email" placeholder="tu@correo.com" required class="newsletter-input w-full pl-11 pr-4 py-4 rounded-none text-sm">
+                    </div>
+                    <button type="submit" id="newsletter-btn" class="px-8 py-4 text-xs uppercase tracking-widest font-medium transition-all duration-300 hover:opacity-80 flex items-center justify-center gap-2" style="background: var(--fg); color: var(--bg); border: 1px solid var(--fg);">
+                        <span id="btn-text">Suscribirse</span>
+                        <iconify-icon id="btn-icon" icon="lucide:arrow-right" width="14"></iconify-icon>
+                        <iconify-icon id="btn-spinner" icon="lucide:loader-2" width="14" class="animate-spin hidden"></iconify-icon>
+                    </button>
+                </div>
+            </form>
+            <div id="newsletter-success" class="hidden mt-6 items-center justify-center gap-2 py-3 px-5" style="border: 1px solid #2a3a2a; background: rgba(34,197,94,0.05);">
+                <iconify-icon icon="lucide:check-circle" width="16" style="color: #4ade80;"></iconify-icon>
+                <span class="text-sm" style="color: #4ade80;">¡Suscripción confirmada! Revisa tu bandeja de entrada.</span>
+            </div>
+            <div id="newsletter-error" class="hidden mt-6 items-center justify-center gap-2 py-3 px-5" style="border: 1px solid #3a2a2a; background: rgba(239,68,68,0.05);">
+                <iconify-icon icon="lucide:alert-circle" width="16" style="color: #f87171;"></iconify-icon>
+                <span class="text-sm" style="color: #f87171;">Introduce un correo electrónico válido.</span>
+            </div>
+            <p class="text-xs text-gray-600 mt-6 fade-in" style="animation-delay: 0.4s;">
+                Sin spam. Puedes cancelar la suscripción en cualquier momento. 
+                <a href="#" class="underline hover:text-gray-400 transition">Política de privacidad</a>
+            </p>
+            <div class="flex items-center justify-center gap-10 mt-12 pt-8 fade-in" style="border-top: 1px solid var(--border); animation-delay: 0.5s;">
+                <div class="text-center">
+                    <div class="font-display text-2xl">48K</div>
+                    <div class="text-xs text-gray-500 mt-1">Suscriptores</div>
+                </div>
+                <div class="w-px h-10" style="background: var(--border);"></div>
+                <div class="text-center">
+                    <div class="font-display text-2xl">Contenido</div>
+                    <div class="text-xs text-gray-500 mt-1">Semanal</div>
+                </div>
+                <div class="w-px h-10" style="background: var(--border);"></div>
+                <div class="text-center">
+                    <div class="font-display text-2xl">5+</div>
+                    <div class="text-xs text-gray-500 mt-1">Años</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="pt-20 pb-8 px-6" style="background: var(--card); border-top: 1px solid var(--border);">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <a href="#" class="font-display text-2xl inline-block mb-5">Paul McCartney</a>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-6">
+                        Página no oficial dedicada a la discografía y trayectoria 
+                        de Sir Paul McCartney. Hecho con admiración por pepsi(Tomás Seguel).
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <a href="#" class="social-icon" title="Facebook"><iconify-icon icon="lucide:facebook" width="16"></iconify-icon></a>
+                        <a href="#" class="social-icon" title="Twitter / X"><iconify-icon icon="lucide:twitter" width="16"></iconify-icon></a>
+                        <a href="#" class="social-icon" title="Instagram"><iconify-icon icon="lucide:instagram" width="16"></iconify-icon></a>
+                        <a href="#" class="social-icon" title="YouTube"><iconify-icon icon="lucide:youtube" width="16"></iconify-icon></a>
+                        <a href="#" class="social-icon" title="Spotify"><iconify-icon icon="lucide:music" width="16"></iconify-icon></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xs uppercase tracking-widest text-gray-400 mb-6 font-medium">Navegación</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link">Inicio</a></li>
+                        <li><a href="#bio" class="footer-link">Biografía</a></li>
+                        <li><a href="#discos" class="footer-link">Discografía</a></li>
+                        <li><a href="#noticias" class="footer-link">Noticias</a></li>
+                        <li><a href="#" class="footer-link">Giras</a></li>
+                        <li><a href="#" class="footer-link">Filmografía</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs uppercase tracking-widest text-gray-400 mb-6 font-medium">Contacto</h4>
+                    <ul class="space-y-5">
+                        <li class="contact-item">
+                            <div class="contact-icon-box"><iconify-icon icon="lucide:mail" width="15"></iconify-icon></div>
+                            <div>
+                                <div class="text-xs text-gray-600 mb-0.5">Redacción</div>
+                                <a href="mailto:redaccion@mccartneyarchive.com" class="footer-link text-sm">redaccion@mccartneyarchive.com</a>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-icon-box"><iconify-icon icon="lucide:mail-plus" width="15"></iconify-icon></div>
+                            <div>
+                                <div class="text-xs text-gray-600 mb-0.5">Colaboraciones</div>
+                                <a href="mailto:collabs@mccartneyarchive.com" class="footer-link text-sm">collabs@mccartneyarchive.com</a>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-icon-box"><iconify-icon icon="lucide:headphones" width="15"></iconify-icon></div>
+                            <div>
+                                <div class="text-xs text-gray-600 mb-0.5">Soporte técnico</div>
+                                <a href="mailto:soporte@mccartneyarchive.com" class="footer-link text-sm">soporte@mccartneyarchive.com</a>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-icon-box"><iconify-icon icon="lucide:phone" width="15"></iconify-icon></div>
+                            <div>
+                                <div class="text-xs text-gray-600 mb-0.5">Teléfono</div>
+                                <a href="tel:+442071234567" class="footer-link text-sm">+44 207 123 4567</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs uppercase tracking-widest text-gray-400 mb-6 font-medium">Legal</h4>
+                    <ul class="space-y-3 mb-8">
+                        <li><a href="#" class="footer-link">Política de Privacidad</a></li>
+                        <li><a href="#" class="footer-link">Términos de Uso</a></li>
+                        <li><a href="#" class="footer-link">Política de Cookies</a></li>
+                        <li><a href="#" class="footer-link">Aviso Legal</a></li>
+                        <li><a href="#" class="footer-link">Créditos</a></li>
+                    </ul>
+                    <div class="contact-item p-4" style="border: 1px solid var(--border);">
+                        <div class="contact-icon-box"><iconify-icon icon="lucide:map-pin" width="15"></iconify-icon></div>
+                        <div>
+                            <div class="text-xs text-gray-600 mb-0.5">Dirección</div>
+                            <p class="text-sm text-gray-500 leading-relaxed">MPL Communications Ltd.<br>1 Soho Square, London<br>W1D 3QT, Reino Unido</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full h-px mb-8" style="background: var(--border);"></div>
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-gray-600">&copy; <span id="current-year"></span> McCartney Archive. Página no oficial. Todos los derechos reservados.</p>
+                <div class="flex items-center gap-6">
+                    <button class="flex items-center gap-1.5 text-xs text-gray-600 hover:text-gray-400 transition cursor-pointer">
+                        <iconify-icon icon="lucide:globe" width="13"></iconify-icon> Español
+                    </button>
+                    <a href="#" class="text-xs text-gray-600 hover:text-gray-400 transition">Accesibilidad</a>
+                    <a href="#" class="text-xs text-gray-600 hover:text-gray-400 transition">RSS</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // ====== MODO CLARO / OSCURO ======
+        const toggle = document.getElementById('theme-toggle');
+        const iconMoon = document.getElementById('icon-moon');
+        const iconSun = document.getElementById('icon-sun');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('mccartney-theme', theme);
+            if (theme === 'light') {
+                iconMoon.style.display = 'none';
+                iconSun.style.display = 'block';
+            } else {
+                iconMoon.style.display = 'block';
+                iconSun.style.display = 'none';
+            }
+        }
+
+        const savedTheme = localStorage.getItem('mccartney-theme') || 'dark';
+        setTheme(savedTheme);
+
+        toggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+
+        // ====== AÑO DINÁMICO ======
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // ====== NEWSLETTER ======
+        const form = document.getElementById('newsletter-form');
+        const successMsg = document.getElementById('newsletter-success');
+        const errorMsg = document.getElementById('newsletter-error');
+        const emailInput = document.getElementById('newsletter-email');
+        const btnText = document.getElementById('btn-text');
+        const btnIcon = document.getElementById('btn-icon');
+        const btnSpinner = document.getElementById('btn-spinner');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            successMsg.classList.add('hidden');
+            successMsg.classList.remove('flex');
+            errorMsg.classList.add('hidden');
+            errorMsg.classList.remove('flex');
+
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
+                errorMsg.classList.remove('hidden');
+                errorMsg.classList.add('flex');
+                return;
+            }
+
+            btnText.textContent = 'Enviando...';
+            btnIcon.classList.add('hidden');
+            btnSpinner.classList.remove('hidden');
+
+            setTimeout(() => {
+                form.classList.add('hidden');
+                successMsg.classList.remove('hidden');
+                successMsg.classList.add('flex');
+                setTimeout(() => {
+                    form.classList.remove('hidden');
+                    btnText.textContent = 'Suscribirse';
+                    btnIcon.classList.remove('hidden');
+                    btnSpinner.classList.add('hidden');
+                    emailInput.value = '';
+                }, 6000);
+            }, 1500);
+        });
+
+        // ====== DISCOGRAFÍA ======
+        const albums = [
+            { title: "McCartney", year: 1970, category: "solo", desc: "Álbum debut solista con el clásico 'Maybe I'm Amazed'.", cover: "https://revistaladosis.com/wp-content/uploads/2020/04/McCartney.jpg" },
+            { title: "Ram", year: 1971, category: "solo", desc: "Considerado su mejor trabajo solista.", cover: "https://www.potq.net/wp-content/uploads/2012/03/ram.jpg" },
+            { title: "Wild Life", year: 1971, category: "wings", desc: "Debut de Wings con sonido crudo y espontáneo.", cover: "https://i.scdn.co/image/ab67616d0000b2737e83653443a9c0dfb31a088e" },
+            { title: "Red Rose Speedway", year: 1973, category: "wings", desc: "Primer éxito de Wings, incluye el hit 'My Love'.", cover: "https://upload.wikimedia.org/wikipedia/en/7/72/Wings%2C_Red_Rose_Speedway_%281973%29.png" },
+            { title: "Band on the Run", year: 1973, category: "wings", desc: "La obra maestra de Paul, grabada en Nigeria.", cover: "https://indiehoy.com/wp-content/uploads/2023/12/paul-mccartney-wings-band-on-the-run.jpg" },
+            { title: "Venus and Mars", year: 1975, category: "wings", desc: "Álbum conceptual con gran éxito comercial.", cover: "https://eu-west-2.graphassets.com/A4WEZhR8eReCuFZel5SMSz/NEKIhNB4QMuAcnk8kVy7" },
+            { title: "Wings at the Speed of Sound", year: 1976, category: "wings", desc: "Cada miembro de Wings canta una canción propia del álbum.", cover: "https://upload.wikimedia.org/wikipedia/en/a/a5/Wings_at_the_Speed_of_Sound_album_cover.png" },
+            { title: "Wings Over America", year: 1976, category: "wings", desc: "Álbum triple en vivo de la legendaria gira Wings Over the World.", cover: "https://i.scdn.co/image/ab67616d0000b273306b62ac051362f1b5974a48" },
+            { title: "London Town", year: 1978, category: "wings", desc: "Grabado parcialmente a bordo de un barco en las Islas Vírgenes.", cover: "https://upload.wikimedia.org/wikipedia/en/f/f4/London_Town.jpg" },
+            { title: "Back to the Egg", year: 1979, category: "wings", desc: "Último álbum de Wings con sonido rockero.", cover: "https://upload.wikimedia.org/wikipedia/en/2/27/BackEggCover.jpg" },
+            { title: "McCartney II", year: 1980, category: "solo", desc: "El más experimental, incluye el hit 'Coming Up'.", cover: "https://i.scdn.co/image/ab67616d0000b273e662e4e2d5584b5bb024dd0c" },
+            { title: "Tug of War", year: 1982, category: "solo", desc: "Producido por George Martin, dueto con Stevie Wonder.", cover: "https://upload.wikimedia.org/wikipedia/en/9/94/PaulMcCartneyalbum_-_TugOfWar.jpg" },
+            { title: "Pipes of Peace", year: 1983, category: "solo", desc: "Dúeto con Michael Jackson en 'Say Say Say' y 'The Girl Is Mine'.", cover: "https://preview.redd.it/pipes-of-peace-was-released-on-this-day-in-1983-is-the-only-v0-0j74pcvlv4yd1.jpeg?auto=webp&s=266ec5a575e256a0c8eb61940f6a860e5f805e28" },
+            { title: "Press to Play", year: 1986, category: "solo", desc: "Producción electrónica con colaboraciones de Elvis Costello.", cover: "https://upload.wikimedia.org/wikipedia/en/d/d8/Paul_McCartney_Press_to_Play.jpg" },
+            { title: "Снова в СССР", year: 1988, category: "solo", desc: "Versiones de rock clásico ruso. Lanzado solo en la Unión Soviética.", cover: "https://upload.wikimedia.org/wikipedia/en/8/89/ChobaCover.jpg" },
+            { title: "Flowers in the Dirt", year: 1989, category: "solo", desc: "Regreso aclamado con coescritura de Elvis Costello.", cover: "https://upload.wikimedia.org/wikipedia/en/3/3b/FlowersDirtCover.jpg" },
+            { title: "Off the Ground", year: 1993, category: "solo", desc: "Sonidos acústicos que impulsaron su primera gira en una década.", cover: "https://i.scdn.co/image/ab67616d0000b2736af6c7921a4a59c1b8129d7c" },
+            { title: "Flaming Pie", year: 1997, category: "solo", desc: "Retorno aclamado a sonidos orgánicos.", cover: "https://i.scdn.co/image/ab67616d0000b2730fc7967ea1e2dfa717ce1e4f" },
+            { title: "Run Devil Run", year: 1999, category: "solo", desc: "Tributo al rock and roll de los años 50 con versiones clásicas.", cover: "https://i.scdn.co/image/ab67616d0000b27301f44c179d26cd1b609a6ad2" },
+            { title: "Driving Rain", year: 2001, category: "solo", desc: "Álbum inspirado en su relación con Heather Mills.", cover: "https://www.americadvd.cl/wp-content/uploads/Captura-de-pantalla-1687.png" },
+            { title: "Chaos and Creation", year: 2005, category: "solo", desc: "Su obra más madura y sofisticada, producida por Nigel Godrich.", cover: "https://http2.mlstatic.com/D_NQ_NP_675251-MLA47417163958_092021-O.webp" },
+            { title: "Memory Almost Full", year: 2006, category: "solo", desc: "Reflexivo y nostálgico, lanzado bajo el sello Hear Music de Starbucks.", cover: "https://upload.wikimedia.org/wikipedia/en/0/07/Memory_Almost_Full.jpg" },
+            { title: "Kisses on the Bottom", year: 2012, category: "solo", desc: "Estándares de jazz y pop de las décadas de 1920 a 1940.", cover: "https://i.scdn.co/image/ab67616d0000b2738de6327e940dd688cebdbae9" },
+            { title: "New", year: 2013, category: "solo", desc: "Producción moderna con colaboraciones de productores jóvenes.", cover: "https://upload.wikimedia.org/wikipedia/en/thumb/7/73/Paul_McCartney_-_New.jpg/250px-Paul_McCartney_-_New.jpg" },
+            { title: "Egypt Station", year: 2018, category: "solo", desc: "Llevó a Paul al #1 de Billboard por primera vez en 36 años.", cover: "https://musiclife.cl/2472-superlarge_default/paul-mccartney-egypt-station.jpg" },
+            { title: "McCartney III", year: 2020, category: "solo", desc: "Grabado íntegramente en casa durante la pandemia.", cover: "https://dojiw2m9tvv09.cloudfront.net/36300/product/6024351365614429.jpg" }
+        ];
+
+        const albumsContainer = document.getElementById('albums');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        function renderAlbums(filter = 'all') {
+            const filtered = filter === 'all' ? albums : albums.filter(a => a.category === filter);
+            albumsContainer.innerHTML = filtered.map(album => `
+                <article class="album-card">
+                    <img src="${album.cover}" alt="${album.title}" class="w-full aspect-square object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-display text-lg">${album.title}</h3>
+                            <span class="text-xs text-gray-500">${album.year}</span>
+                        </div>
+                        <p class="text-sm text-gray-400">${album.desc}</p>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderAlbums(btn.dataset.filter);
+            });
+        });
+
+        // Fade en scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.style.animationPlayState = 'running';
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        renderAlbums();
+    </script>
+</body>
+</html>
